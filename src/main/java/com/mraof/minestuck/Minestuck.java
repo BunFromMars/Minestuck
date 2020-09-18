@@ -32,7 +32,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import static com.mraof.minestuck.Minestuck.MOD_ID;
 import static com.mraof.minestuck.world.gen.OreGeneration.setupOverworldOreGeneration;
-
+//comment test change
 @Mod(MOD_ID)
 public class Minestuck
 {

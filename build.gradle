@@ -33,6 +33,7 @@ repositories {
         name = "RS maven"
         url = "https://repo.refinedmods.com"
     }
+    maven { url 'https://repo.repsy.io/mvn/gandiber/geckolib' }
 }
 
 version = '1.15.2-1.4.' + System.env.BUILD_NUMBER
@@ -125,6 +126,7 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${project.getProperty('mc_jei_version')}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${project.getProperty('mc_jei_version')}")
     compileOnly fg.deobf("com.refinedmods:refinedstorage:${project.getProperty('mc_refined_storage_version')}")
+    implementation fg.deobf('software.bernie.geckolib:forge-1.15.2-geckolib:2.0.0')
 }
 
 sourceSets.main.resources {

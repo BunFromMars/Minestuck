@@ -65,3 +65,11 @@ Adds Homestuck to your Minecraft!
     versionRange="[1.15.2]"
     ordering="NONE"
     side="BOTH"
+	
+#Anotha one
+[[dependencies.minestuck]]
+	modId="geckolib"
+	mandatory=true
+	versionRange="[2.0.0]"
+	ordering="NONE"
+	side="BOTH"

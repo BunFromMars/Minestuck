@@ -1,7 +1,12 @@
-// Made with Blockbench 3.6.6
-// Exported for Minecraft version 1.15
-// Paste this class into your mod and generate all required imports
+package com.mraof.minestuck.client.model;
 
+import com.google.common.collect.ImmutableList;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.util.math.MathHelper;
+import com.mojang.blaze3d.matrix.*;
+import net.minecraft.entity.*;
 
 public class ServerCursorModel extends EntityModel<Entity> {
 	private final ModelRenderer cursor;

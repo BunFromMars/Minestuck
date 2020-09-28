@@ -12,7 +12,6 @@ import software.bernie.geckolib.manager.EntityAnimationManager;
 
 public class CursorEntity extends Entity implements IAnimatedEntity
 {
-	public boolean markedForDespawn;
 	private final ServerPlayerEntity playerEntity;
 	public float rotationYawHead;
 	
@@ -20,8 +19,6 @@ public class CursorEntity extends Entity implements IAnimatedEntity
 	{
 		super(MSEntityTypes.SERVER_CURSOR, world);
 		playerEntity = null;
-		if(!world.isRemote)	//If not spawned the way it should
-			markedForDespawn = true;
 	}
 	
 	public CursorEntity(ServerWorld world, ServerPlayerEntity player)
@@ -31,9 +28,25 @@ public class CursorEntity extends Entity implements IAnimatedEntity
 	}
 	
 	@Override
+	public IPacket<?> createSpawnPacket()
+	{
+		return NetworkHooks.getEntitySpawningPacket(this);
+	}
+	
+	@Override
 	protected void registerData()
 	{
 	
+	}
+	
+	@Override
+	public void tick()
+	{
+		super.tick();
+		if(playerEntity != null)
+		{
+			this.setPositionAndRotation(playerEntity.getPosX(), playerEntity.getPosY(), playerEntity.getPosZ(), playerEntity.rotationYaw, playerEntity.rotationPitch);
+		}
 	}
 	
 	@Override
@@ -46,27 +59,6 @@ public class CursorEntity extends Entity implements IAnimatedEntity
 	protected void writeAdditional(CompoundNBT compound)
 	{
 	
-	}
-	
-	@Override
-	public IPacket<?> createSpawnPacket()
-	{
-		return NetworkHooks.getEntitySpawningPacket(this);
-	}
-	
-	@Override
-	public void tick()
-	{
-		if(markedForDespawn)
-		{
-			this.remove();
-			return;
-		}
-		super.tick();
-		if(playerEntity != null)
-		{
-			this.setPositionAndRotation(playerEntity.getPosX(), playerEntity.getPosY(), playerEntity.getPosZ(), playerEntity.rotationYaw, playerEntity.rotationPitch);
-		}
 	}
 	
 	@Override

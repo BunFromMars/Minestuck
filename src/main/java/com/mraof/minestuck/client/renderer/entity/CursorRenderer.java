@@ -44,8 +44,8 @@ public class CursorRenderer extends EntityRenderer<CursorEntity>
 		matrixStackIn.push();
 		matrixStackIn.translate(0, 1, 0);
 		matrixStackIn.rotate(Vector3f.XP.rotationDegrees(0F));
-		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(0F));
-		matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(0F));
+		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(-120F));
+		matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(-90F));
 		matrixStackIn.scale(1.5F, 1.5F, 1.5F);
 		this.cursorModel.setRotationAngles(entityIn, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F);
 		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(this.cursorModel.getRenderType(this.getEntityTexture(entityIn)));

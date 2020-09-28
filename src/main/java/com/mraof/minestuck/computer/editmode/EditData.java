@@ -34,16 +34,14 @@ public class EditData
 {
 	private static final Logger LOGGER = LogManager.getLogger();
 	
-	EditData(DecoyEntity decoy, CursorEntity cursor, ServerPlayerEntity player, SburbConnection c)
+	EditData(DecoyEntity decoy, ServerPlayerEntity player, SburbConnection c)
 	{
 		this.decoy = decoy;
-		this.cursor = cursor;
 		this.player = player;
 		this.connection = c;
 	}
 	
 	private final DecoyEntity decoy;
-	private final CursorEntity cursor;
 	
 	final SburbConnection connection;
 	
@@ -73,11 +71,6 @@ public class EditData
 	public DecoyEntity getDecoy()
 	{
 		return decoy;
-	}
-	
-	public CursorEntity getCursor()
-	{
-		return cursor;
 	}
 	
 	public void sendGristCacheToEditor()

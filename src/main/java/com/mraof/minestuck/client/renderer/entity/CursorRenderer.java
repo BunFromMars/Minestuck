@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.client.model.ServerCursorModel;
+import com.mraof.minestuck.computer.editmode.ServerEditHandler;
 import com.mraof.minestuck.entity.CursorEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.Vector3f;
@@ -14,12 +15,15 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public class CursorRenderer extends EntityRenderer<PlayerEntity>
+public class CursorRenderer extends EntityRenderer<CursorEntity>
 {
 	
 	private static final ResourceLocation CURSOR_TEXTURES = new ResourceLocation(Minestuck.MOD_ID, "textures/entity/cursor.png");
-	protected final EntityModel<LivingEntity> cursorModel = new ServerCursorModel();
+	protected final EntityModel<CursorEntity> cursorModel = new ServerCursorModel();
 	
 	public CursorRenderer(EntityRendererManager renderManager)
 	{
@@ -27,13 +31,13 @@ public class CursorRenderer extends EntityRenderer<PlayerEntity>
 	}
 	
 	@Override
-	public ResourceLocation getEntityTexture(PlayerEntity entity)
+	public ResourceLocation getEntityTexture(CursorEntity entity)
 	{
 		return CURSOR_TEXTURES;
 	}
 	
 	@Override
-	public void render(PlayerEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn)
+	public void render(CursorEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn)
 	{
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 		

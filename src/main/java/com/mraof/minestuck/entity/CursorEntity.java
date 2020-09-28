@@ -14,6 +14,7 @@ public class CursorEntity extends Entity implements IAnimatedEntity
 {
 	public boolean markedForDespawn;
 	private final ServerPlayerEntity playerEntity;
+	public float rotationYawHead;
 	
 	public CursorEntity(World world)
 	{

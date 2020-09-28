@@ -14,7 +14,7 @@ import software.bernie.geckolib.animation.model.AnimatedEntityModel;
 import software.bernie.geckolib.animation.render.AnimatedModelRenderer;
 import software.bernie.geckolib.entity.IAnimatedEntity;
 
-public class ServerCursorModel extends AnimatedEntityModel<LivingEntity> {
+public class ServerCursorModel extends AnimatedEntityModel<CursorEntity> {
 
     private final AnimatedModelRenderer cursor;
 	private final AnimatedModelRenderer roof1;

@@ -3,7 +3,9 @@ package com.mraof.minestuck.computer.editmode;
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.MinestuckConfig;
 import com.mraof.minestuck.client.gui.playerStats.PlayerStatsScreen;
+import com.mraof.minestuck.client.renderer.entity.CursorRenderer;
 import com.mraof.minestuck.client.util.GuiUtil;
+import com.mraof.minestuck.entity.CursorEntity;
 import com.mraof.minestuck.item.crafting.alchemy.*;
 import com.mraof.minestuck.network.ClientEditPacket;
 import com.mraof.minestuck.network.MSPacketHandler;
@@ -26,6 +28,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -237,6 +240,24 @@ public final class ClientEditHandler
 				event.setCanceled(true);
 				PlayerStatsScreen.editmodeTab = PlayerStatsScreen.EditmodeGuiType.DEPLOY_LIST;
 				PlayerStatsScreen.openGui(true);
+		}
+	}
+	
+	private static CursorRenderer cursorRenderer = null;
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
+	public static void playerRender(RenderPlayerEvent.Pre event)
+	{
+		PlayerEntity player = event.getPlayer();
+		
+		if(isActive())
+		{
+			event.setCanceled(true);
+			if(cursorRenderer == null)
+				cursorRenderer = new CursorRenderer(event.getRenderer().getRenderManager());
+			CursorEntity cursor = new CursorEntity(player.world);
+			cursor.setPositionAndRotation(player.getPosX(), player.getPosY(), player.getPosZ(), player.rotationYaw, player.rotationPitch);
+			
+			cursorRenderer.render(cursor, cursor.rotationYawHead, event.getPartialRenderTick(), event.getMatrixStack(), event.getBuffers(), event.getLight());
 		}
 	}
 }

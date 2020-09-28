@@ -4,13 +4,17 @@
 // Blockbench plugin created by Gecko
 package com.mraof.minestuck.client.model;
 
+import com.mraof.minestuck.Minestuck;
+import com.mraof.minestuck.entity.CursorEntity;
+import com.mraof.minestuck.entity.DecoyEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib.animation.model.AnimatedEntityModel;
 import software.bernie.geckolib.animation.render.AnimatedModelRenderer;
 import software.bernie.geckolib.entity.IAnimatedEntity;
 
-public class ServerCursorModel extends AnimatedEntityModel<IAnimatedEntity> {
+public class ServerCursorModel extends AnimatedEntityModel<LivingEntity> {
 
     private final AnimatedModelRenderer cursor;
 	private final AnimatedModelRenderer roof1;
@@ -100,6 +104,6 @@ public class ServerCursorModel extends AnimatedEntityModel<IAnimatedEntity> {
     @Override
     public ResourceLocation getAnimationFileLocation()
     {
-        return new ResourceLocation("MODID", "animations/ANIMATIONFILE.json");
+        return new ResourceLocation(Minestuck.MOD_ID, "animations/cursor_animations.json");
     }
 }

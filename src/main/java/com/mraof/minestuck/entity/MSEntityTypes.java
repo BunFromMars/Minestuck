@@ -48,6 +48,7 @@ public final class MSEntityTypes
 	public static final EntityType<GristEntity> GRIST = getNull();
 	public static final EntityType<VitalityGelEntity> VITALITY_GEL = getNull();
 	public static final EntityType<DecoyEntity> PLAYER_DECOY = getNull();
+	public static final EntityType<CursorEntity> SERVER_CURSOR = getNull();
 	
 	public static final EntityType<MetalBoatEntity> METAL_BOAT = getNull();
 	public static final EntityType<BarbasolBombEntity> BARBASOL_BOMB = getNull();
@@ -91,6 +92,7 @@ public final class MSEntityTypes
 		register(registry, EntityType.Builder.<GristEntity>create(GristEntity::new, EntityClassification.MISC).size(1 / 3F, 1 / 3F).setTrackingRange(4).setUpdateInterval(20).immuneToFire(), "grist");
 		register(registry, EntityType.Builder.<VitalityGelEntity>create(VitalityGelEntity::new, EntityClassification.MISC).size(1 / 4F, 1 / 4F).setTrackingRange(4).setUpdateInterval(20).immuneToFire(), "vitality_gel");
 		register(registry, EntityType.Builder.<DecoyEntity>create(EntityClassification.MISC).setCustomClientFactory((spawnEntity, world) -> new DecoyEntity(world)).disableSerialization().disableSummoning(), "player_decoy");
+		register(registry, EntityType.Builder.<CursorEntity>create(EntityClassification.MISC).setCustomClientFactory((spawnEntity, world) -> new CursorEntity(world)).disableSerialization().disableSummoning(), "server_cursor");
 		
 		register(registry, EntityType.Builder.<MetalBoatEntity>create(MetalBoatEntity::new, EntityClassification.MISC).size(1.375F, 0.5625F), "metal_boat");
 		register(registry, EntityType.Builder.<BarbasolBombEntity>create(BarbasolBombEntity::new, EntityClassification.MISC).size(0.25F, 0.25F).setTrackingRange(4).setUpdateInterval(10), "barbasol_bomb");

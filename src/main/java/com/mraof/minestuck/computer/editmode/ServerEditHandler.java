@@ -2,6 +2,7 @@ package com.mraof.minestuck.computer.editmode;
 
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.MinestuckConfig;
+import com.mraof.minestuck.entity.CursorEntity;
 import com.mraof.minestuck.entity.DecoyEntity;
 import com.mraof.minestuck.event.ConnectionClosedEvent;
 import com.mraof.minestuck.event.SburbEvent;
@@ -114,7 +115,7 @@ public final class ServerEditHandler	//TODO Consider splitting this class into t
 			
 			MSExtraData data = MSExtraData.get(event.getEntity().world);
 			data.removeEditData(prevData);
-			data.addEditData(new EditData(prevData.getDecoy(), (ServerPlayerEntity) event.getPlayer(), prevData.connection));
+			data.addEditData(new EditData(prevData.getDecoy(), prevData.getCursor(), (ServerPlayerEntity) event.getPlayer(), prevData.connection));
 		}
 	}
 	
@@ -171,6 +172,7 @@ public final class ServerEditHandler	//TODO Consider splitting this class into t
 		MSPacketHandler.sendToPlayer(packet, player);
 		
 		editData.getDecoy().markedForDespawn = true;
+		editData.getCursor().markedForDespawn = true;
 		
 		if(damageSource != null && damageSource.getImmediateSource() != player)
 			player.attackEntityFrom(damageSource, damage);
@@ -188,7 +190,8 @@ public final class ServerEditHandler	//TODO Consider splitting this class into t
 		{
 			Debug.info("Activating edit mode on player \""+player.getName().getFormattedText()+"\", target player: \""+computerTarget+"\".");
 			DecoyEntity decoy = new DecoyEntity((ServerWorld) player.world, player);
-			EditData data = new EditData(decoy, player, c);
+			CursorEntity cursor = new CursorEntity((ServerWorld) player.world, player);
+			EditData data = new EditData(decoy, cursor, player, c);
 
 			if(!setPlayerStats(player, c))
 			{
@@ -198,6 +201,7 @@ public final class ServerEditHandler	//TODO Consider splitting this class into t
 			if(c.inventory != null)
 				player.inventory.read(c.inventory);
 			decoy.world.addEntity(decoy);
+			cursor.world.addEntity(cursor);
 			MSExtraData.get(player.world).addEditData(data);
 
 			BlockPos center = getEditmodeCenter(c);
@@ -234,6 +238,13 @@ public final class ServerEditHandler	//TODO Consider splitting this class into t
 		
 		player.setGameType(GameType.CREATIVE);
 		player.sendPlayerAbilities();
+		
+		if(!player.isInvisible())
+		{
+			System.out.println("set invisible");
+			player.setInvisible(true);
+			System.out.println(player.isInvisible());
+		}
 		
 		return true;
 	}

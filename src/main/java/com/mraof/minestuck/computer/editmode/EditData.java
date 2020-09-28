@@ -1,5 +1,6 @@
 package com.mraof.minestuck.computer.editmode;
 
+import com.mraof.minestuck.entity.CursorEntity;
 import com.mraof.minestuck.entity.DecoyEntity;
 import com.mraof.minestuck.item.crafting.alchemy.GristSet;
 import com.mraof.minestuck.network.GristCachePacket;
@@ -33,14 +34,16 @@ public class EditData
 {
 	private static final Logger LOGGER = LogManager.getLogger();
 	
-	EditData(DecoyEntity decoy, ServerPlayerEntity player, SburbConnection c)
+	EditData(DecoyEntity decoy, CursorEntity cursor, ServerPlayerEntity player, SburbConnection c)
 	{
 		this.decoy = decoy;
+		this.cursor = cursor;
 		this.player = player;
 		this.connection = c;
 	}
 	
 	private final DecoyEntity decoy;
+	private final CursorEntity cursor;
 	
 	final SburbConnection connection;
 	
@@ -70,6 +73,11 @@ public class EditData
 	public DecoyEntity getDecoy()
 	{
 		return decoy;
+	}
+	
+	public CursorEntity getCursor()
+	{
+		return cursor;
 	}
 	
 	public void sendGristCacheToEditor()
@@ -208,6 +216,8 @@ public class EditData
 			player.sendPlayerAbilities();
 			player.fallDistance = 0;
 			
+			System.out.println("set not invisible");
+			player.setInvisible(false); //TODO Could create variable
 			player.setHealth(health);
 			player.getFoodStats().read(foodStats);
 			player.inventory.read(inventory);

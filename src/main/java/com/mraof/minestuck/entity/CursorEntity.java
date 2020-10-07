@@ -43,10 +43,6 @@ public class CursorEntity extends Entity implements IAnimatedEntity
 	public void tick()
 	{
 		super.tick();
-		if(playerEntity != null)
-		{
-			this.setPositionAndRotation(playerEntity.getPosX(), playerEntity.getPosY(), playerEntity.getPosZ(), playerEntity.rotationYaw, playerEntity.rotationPitch);
-		}
 	}
 	
 	@Override

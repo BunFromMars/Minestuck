@@ -6,13 +6,9 @@ package com.mraof.minestuck.client.model;
 
 import com.mraof.minestuck.Minestuck;
 import com.mraof.minestuck.entity.CursorEntity;
-import com.mraof.minestuck.entity.DecoyEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib.animation.model.AnimatedEntityModel;
 import software.bernie.geckolib.animation.render.AnimatedModelRenderer;
-import software.bernie.geckolib.entity.IAnimatedEntity;
 
 public class ServerCursorModel extends AnimatedEntityModel<CursorEntity> {
 
@@ -30,7 +26,7 @@ public class ServerCursorModel extends AnimatedEntityModel<CursorEntity> {
         textureWidth = 16;
     textureHeight = 16;
     cursor = new AnimatedModelRenderer(this);
-		cursor.setRotationPoint(0.25F, 22.25F, 0.0F);
+		cursor.setRotationPoint(0.75F, 13.75F, 0.0F);
 		setRotationAngle(cursor, 0.0F, 0.0F, -1.5708F);
 		
 		cursor.setModelRendererName("cursor");
@@ -104,6 +100,6 @@ public class ServerCursorModel extends AnimatedEntityModel<CursorEntity> {
     @Override
     public ResourceLocation getAnimationFileLocation()
     {
-        return new ResourceLocation(Minestuck.MOD_ID, "animations/cursor_animations.json");
+        return new ResourceLocation(Minestuck.MOD_ID,"animations/cursor_animations.json");
     }
 }

@@ -244,20 +244,19 @@ public final class ClientEditHandler
 	}
 	
 	private static CursorRenderer cursorRenderer = null;
+	private static CursorEntity cursor = null;
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public static void playerRender(RenderPlayerEvent.Pre event)
 	{
 		PlayerEntity player = event.getPlayer();
-		
 		if(isActive())
 		{
 			event.setCanceled(true);
 			if(cursorRenderer == null)
 				cursorRenderer = new CursorRenderer(event.getRenderer().getRenderManager());
-			CursorEntity cursor = new CursorEntity(player.world);
-			cursor.setPositionAndRotation(player.getPosX(), player.getPosY(), player.getPosZ(), player.rotationYaw, player.rotationPitch);
-			
-			cursorRenderer.render(cursor, cursor.rotationYawHead, event.getPartialRenderTick(), event.getMatrixStack(), event.getBuffers(), event.getLight());
+			if(cursor == null)
+				cursor = new CursorEntity(player.world);
+			cursorRenderer.render(cursor, player.rotationYawHead, event.getPartialRenderTick(), event.getMatrixStack(), event.getBuffers(), event.getLight());
 		}
 	}
 }
